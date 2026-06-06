@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.hashvis.model.hashfunc.HashFunction;
-import com.hashvis.model.helper.HashAction;
+import com.hashvis.model.util.HashAction;
 import com.hashvis.model.table.Row;
 
 abstract class OpenAddressing extends CollisionStrategyController {
   private Integer probeCount = 0;
-  private Integer hashValue = null;
+  protected Integer hashValue = null;
   private HashFunction hashFunc;
   private Row currentRow = null;
 
-  abstract protected int handleBucketSelection(int hashValue, int probeCount);
+  abstract protected int handleBucketSelection(int probeCount);
 
   @Override
   public boolean useSeparateChaining() {
@@ -96,7 +96,7 @@ abstract class OpenAddressing extends CollisionStrategyController {
         return null;
       }
 
-      currentRow = table.getRow(handleBucketSelection(hashValue, probeCount));
+      currentRow = table.getRow(handleBucketSelection(probeCount));
       probeCount++;
       return new Result("Accessing bucket index " + currentRow.getIndex(), 0);
     }

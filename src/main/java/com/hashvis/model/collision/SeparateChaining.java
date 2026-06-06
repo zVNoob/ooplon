@@ -3,7 +3,7 @@ package com.hashvis.model.collision;
 import java.util.List;
 
 import com.hashvis.model.hashfunc.HashFunction;
-import com.hashvis.model.helper.HashAction;
+import com.hashvis.model.util.HashAction;
 import com.hashvis.model.table.Item;
 import com.hashvis.model.table.Row;
 import java.util.ArrayList;

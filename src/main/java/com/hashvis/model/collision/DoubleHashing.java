@@ -6,24 +6,25 @@ import java.util.ArrayList;
 import com.hashvis.model.hashfunc.HashFunction;
 import com.hashvis.model.hashfunc.HashFunctionNumber;
 import com.hashvis.model.hashfunc.HashFunctionString;
-import com.hashvis.model.helper.DataType;
-import com.hashvis.model.helper.HashAction;
+import com.hashvis.model.util.*;
 
 public class DoubleHashing extends OpenAddressing {
-  private Integer hashValue1 = null;
   private Integer hashValue2 = null;
   private HashFunction hashFunc1;
   private HashFunction hashFunc2;
-  @Override 
-  protected ArrayList<String> initalizePseudocode(){
+
+  @Override
+  protected ArrayList<String> initalizePseudocode() {
     ArrayList<String> pseudocode = new ArrayList<String>();
     pseudocode.add("step = 0 ; i = base =hash1(k,n) ; jumpdistance = hash2(k,n)");
     return pseudocode;
   }
+
   @Override
-  protected String getcurrent_ResolverType(){
+  protected String getcurrent_ResolverType() {
     return " i = (base + step * jumpdistance) % size of HT";
   }
+
   @Override
   public List<HashFunction> getHashFunctionFields(DataType dataType) {
     HashFunction hf1;
@@ -53,20 +54,20 @@ public class DoubleHashing extends OpenAddressing {
   @Override
   protected void uniqueInitalize(HashAction action) {
     super.uniqueInitalize(action);
-    hashValue1 = null;
+    hashValue = null;
     hashValue2 = null;
   }
 
   @Override
-  protected int handleBucketSelection(int hashValue, int probeCount) {
-    return (hashValue+probeCount*hashValue2)%table.size();
+  protected int handleBucketSelection(int probeCount) {
+    return (hashValue + probeCount * hashValue2) % table.size();
   }
 
   @Override
   public Result firstStep() {
-    if (hashValue1 == null) {
-      hashValue1 = hashFunc1.compute(key, table.size());
-      return new Result("Hash value: " + hashValue1, 0);
+    if (hashValue == null) {
+      hashValue = hashFunc1.compute(key, table.size());
+      return new Result("Hash value: " + hashValue, 0);
     }
     if (hashValue2 == null) {
       hashValue2 = hashFunc2.compute(key, table.size());

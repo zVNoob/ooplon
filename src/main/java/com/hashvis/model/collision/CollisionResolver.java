@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.hashvis.model.hashfunc.*;
 import com.hashvis.model.table.Table;
-import com.hashvis.model.helper.DataType;
-import com.hashvis.model.helper.HashAction;
+import com.hashvis.model.util.*;
 
 public interface CollisionResolver {
 
